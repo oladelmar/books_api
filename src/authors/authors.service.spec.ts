@@ -11,7 +11,7 @@ const mockAuthorRepository = () => ({
   find: jest.fn(),
   findOne: jest.fn(),
   createAuthor: jest.fn(),
-  updateAuthor: jest.fn(),
+  save: jest.fn(),
   delete: jest.fn(),
 });
 
@@ -104,13 +104,12 @@ describe('AuthorsService', () => {
       expect(service.updateAuthor).rejects.toThrow(NotFoundException);
     });
 
-    it('calls repository.updateBook with provided id and data', async () => {
-      service.getAuthorById = jest.fn();
+    it('if author is found, calls repository.save', async () => {
+      service.getAuthorById = jest
+        .fn()
+        .mockResolvedValue({ firstName: 'First', lastName: 'Last' });
       await service.updateAuthor(mockId, mockUpdateAuthor);
-      expect(repository.updateAuthor).toHaveBeenCalledWith(
-        mockId,
-        mockUpdateAuthor,
-      );
+      expect(repository.save).toHaveBeenCalled();
     });
   });
 

@@ -42,7 +42,7 @@ export class BooksService {
     return this.bookRepository.createBook(createBookDto);
   }
 
-  async updateBook(id: string, updateBookDto: UpdateBookDto): Promise<void> {
+  async updateBook(id: string, updateBookDto: UpdateBookDto): Promise<Book> {
     if (!updateBookDto || !Object.entries(updateBookDto).length) {
       throw new BadRequestException('No data provided for update');
     }
@@ -54,8 +54,9 @@ export class BooksService {
         );
       }
     }
-    await this.getBookById(id);
-    await this.bookRepository.updateBook(id, updateBookDto);
+    const book = await this.getBookById(id);
+    const updatedBook = { ...book, ...updateBookDto };
+    return await this.bookRepository.updateBook(updatedBook);
   }
 
   async deleteBook(id: string): Promise<void> {

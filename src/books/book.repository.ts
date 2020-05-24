@@ -1,7 +1,6 @@
 import { Book } from './book.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateBookDto } from './dto/create-book.dto';
-import { UpdateBookDto } from './dto/update-book.dto';
 import {
   ConflictException,
   InternalServerErrorException,
@@ -31,11 +30,9 @@ export class BookRepository extends Repository<Book> {
     return book;
   }
 
-  async updateBook(id: string, updateBookDto: UpdateBookDto): Promise<void> {
-    const updatedAt = new Date().toISOString();
-    const toBeUpdated = { ...updateBookDto, updatedAt };
+  async updateBook(updatedBook: Book): Promise<Book> {
     try {
-      await this.update(id, toBeUpdated);
+      return await this.save(updatedBook);
     } catch (error) {
       if (error.code === 11000) {
         throw new ConflictException('ISBN already exists');

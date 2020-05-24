@@ -45,7 +45,7 @@ export class AuthorsController {
   updateAuthor(
     @Param(ValidationPipe) idParamDto: IdParamDto,
     @Body(ValidationPipe) updateAuthorDto: UpdateAuthorDto,
-  ): Promise<void> {
+  ): Promise<Author> {
     return this.authorsService.updateAuthor(idParamDto.id, updateAuthorDto);
   }
 

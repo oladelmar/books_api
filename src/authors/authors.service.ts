@@ -40,12 +40,13 @@ export class AuthorsService {
   async updateAuthor(
     id: string,
     updateAuthorDto: UpdateAuthorDto,
-  ): Promise<void> {
+  ): Promise<Author> {
     if (!updateAuthorDto || !Object.entries(updateAuthorDto).length) {
       throw new BadRequestException('No data provided for update');
     }
-    await this.getAuthorById(id);
-    await this.authorRepository.updateAuthor(id, updateAuthorDto);
+    const author = await this.getAuthorById(id);
+    const updatedAuthor = { ...author, ...updateAuthorDto };
+    return await this.authorRepository.save(updatedAuthor);
   }
 
   async deleteAuthor(id: string): Promise<void> {

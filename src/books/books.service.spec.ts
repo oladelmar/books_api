@@ -135,11 +135,11 @@ describe('BooksService', () => {
       expect(service.updateBook).rejects.toThrow(NotFoundException);
     });
 
-    it('calls repository.updateBook with provided id and data', async () => {
+    it('if the book is found, calls repository.updateBook', async () => {
       authorRepository.findOne.mockResolvedValue('author');
       service.getBookById = jest.fn();
       await service.updateBook(mockId, updateBookDto);
-      expect(repository.updateBook).toHaveBeenCalledWith(mockId, updateBookDto);
+      expect(repository.updateBook).toHaveBeenCalled();
     });
   });
 

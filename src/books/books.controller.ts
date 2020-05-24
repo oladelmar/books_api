@@ -43,7 +43,7 @@ export class BooksController {
   updateBook(
     @Param(ValidationPipe) idParamDto: IdParamDto,
     @Body(ValidationPipe) updateBookDto: UpdateBookDto,
-  ): Promise<void> {
+  ): Promise<Book> {
     return this.booksService.updateBook(idParamDto.id, updateBookDto);
   }
 

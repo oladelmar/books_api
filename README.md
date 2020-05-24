@@ -115,6 +115,17 @@ $ npm run test
 
 - Response: 200
 
+- Body
+
+        {
+          "_id": "",
+          "firstName": "",
+          "lastName": "",
+          "birthday": "",
+          "createdAt": "",
+          "updatedAt": ""
+        }
+
 ## Delete Author [DELETE /authors/:id]
 
 - Request: Delete existing author
@@ -222,6 +233,18 @@ $ npm run test
 
 - Response: 200
 
+  - Body
+
+        {
+          "_id": "",
+          "title": "",
+          "author": "",
+          "isbn": "",
+          "publishedAt": "",
+          "createdAt": "",
+          "updatedAt": ""
+        }
+
 ## Delete Book [DELETE /books/:id]
 
 - Request: Delete existing book
@@ -230,4 +253,4 @@ $ npm run test
 
     - id: MongoDB id - Unique identifier of the book
 
-* Response: 200
+- Response: 200
