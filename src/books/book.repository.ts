@@ -34,6 +34,14 @@ export class BookRepository extends Repository<Book> {
   async updateBook(id: string, updateBookDto: UpdateBookDto): Promise<void> {
     const updatedAt = new Date().toISOString();
     const toBeUpdated = { ...updateBookDto, updatedAt };
-    await this.update(id, toBeUpdated);
+    try {
+      await this.update(id, toBeUpdated);
+    } catch (error) {
+      if (error.code === 11000) {
+        throw new ConflictException('ISBN already exists');
+      } else {
+        throw new InternalServerErrorException();
+      }
+    }
   }
 }
