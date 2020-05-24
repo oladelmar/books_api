@@ -41,7 +41,7 @@ export class AuthorsService {
     id: string,
     updateAuthorDto: UpdateAuthorDto,
   ): Promise<void> {
-    if (!Object.entries(updateAuthorDto).length) {
+    if (!updateAuthorDto || !Object.entries(updateAuthorDto).length) {
       throw new BadRequestException('No data provided for update');
     }
     await this.getAuthorById(id);

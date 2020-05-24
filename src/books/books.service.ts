@@ -43,7 +43,7 @@ export class BooksService {
   }
 
   async updateBook(id: string, updateBookDto: UpdateBookDto): Promise<void> {
-    if (!Object.entries(updateBookDto).length) {
+    if (!updateBookDto || !Object.entries(updateBookDto).length) {
       throw new BadRequestException('No data provided for update');
     }
     if (updateBookDto.author) {
