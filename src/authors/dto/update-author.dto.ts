@@ -11,5 +11,5 @@ export class UpdateAuthorDto {
 
   @IsOptional()
   @IsDateString()
-  birthday: Date;
+  birthday: string;
 }

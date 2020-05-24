@@ -21,5 +21,5 @@ export class UpdateBookDto {
 
   @IsOptional()
   @IsDateString()
-  publishedAt: Date;
+  publishedAt: string;
 }

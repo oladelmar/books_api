@@ -8,5 +8,5 @@ export class CreateAuthorDto {
   lastName: string;
 
   @IsDateString()
-  birthday: Date;
+  birthday: string;
 }

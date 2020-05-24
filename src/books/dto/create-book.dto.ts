@@ -11,5 +11,5 @@ export class CreateBookDto {
   isbn: string;
 
   @IsDateString()
-  publishedAt: Date;
+  publishedAt: string;
 }

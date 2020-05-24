@@ -18,11 +18,11 @@ export class Author {
   lastName: string;
 
   @Column()
-  birthday: Date;
+  birthday: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt: string;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt: string;
 }
