@@ -2,6 +2,10 @@ import { Book } from './book.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import {
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 
 @EntityRepository(Book)
 export class BookRepository extends Repository<Book> {
@@ -15,7 +19,15 @@ export class BookRepository extends Repository<Book> {
       publishedAt,
     });
 
-    await this.save(book);
+    try {
+      await this.save(book);
+    } catch (error) {
+      if (error.code === 11000) {
+        throw new ConflictException('ISBN already exists');
+      } else {
+        throw new InternalServerErrorException();
+      }
+    }
     return book;
   }
 
