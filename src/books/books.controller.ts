@@ -48,7 +48,7 @@ export class BooksController {
   }
 
   @Delete('/:id')
-  deleteBook(@Param(ValidationPipe) idParamDto: IdParamDto): Promise<void> {
+  deleteBook(@Param(ValidationPipe) idParamDto: IdParamDto): Promise<Book> {
     return this.booksService.deleteBook(idParamDto.id);
   }
 }

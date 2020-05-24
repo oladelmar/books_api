@@ -49,7 +49,8 @@ export class AuthorsService {
     return await this.authorRepository.save(updatedAuthor);
   }
 
-  async deleteAuthor(id: string): Promise<void> {
-    await this.authorRepository.delete(id);
+  async deleteAuthor(id: string): Promise<Author> {
+    const author = await this.getAuthorById(id);
+    return await this.authorRepository.remove(author);
   }
 }

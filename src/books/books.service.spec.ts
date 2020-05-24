@@ -13,7 +13,7 @@ const mockBookRepository = () => ({
   findOne: jest.fn(),
   createBook: jest.fn(),
   updateBook: jest.fn(),
-  delete: jest.fn(),
+  remove: jest.fn(),
 });
 
 const mockAuthRepository = () => ({
@@ -145,8 +145,10 @@ describe('BooksService', () => {
 
   describe('deleteBook', () => {
     it('calls repository.delete with provided id', async () => {
+      service.getBookById = jest.fn().mockResolvedValue('book');
+
       await service.deleteBook(mockId);
-      expect(repository.delete).toHaveBeenCalledWith(mockId);
+      expect(repository.remove).toHaveBeenCalledWith('book');
     });
   });
 });

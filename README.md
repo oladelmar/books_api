@@ -136,6 +136,16 @@ $ npm run test
 
 * Response: 200
 
+  - Body
+
+        {
+          "firstName": "",
+          "lastName": "",
+          "birthday": "",
+          "createdAt": "",
+          "updatedAt": ""
+        }
+
 ## Get All Books [GET /books]
 
 - Request: Get all books
@@ -254,3 +264,14 @@ $ npm run test
     - id: MongoDB id - Unique identifier of the book
 
 - Response: 200
+
+  - Body
+
+        {
+          "title": "",
+          "author": "",
+          "isbn": "",
+          "publishedAt": "",
+          "createdAt": "",
+          "updatedAt": ""
+        }

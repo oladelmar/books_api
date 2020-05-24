@@ -50,7 +50,7 @@ export class AuthorsController {
   }
 
   @Delete('/:id')
-  deleteAuthor(@Param(ValidationPipe) idParamDto: IdParamDto): Promise<void> {
+  deleteAuthor(@Param(ValidationPipe) idParamDto: IdParamDto): Promise<Author> {
     return this.authorsService.deleteAuthor(idParamDto.id);
   }
 }

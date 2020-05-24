@@ -59,7 +59,8 @@ export class BooksService {
     return await this.bookRepository.updateBook(updatedBook);
   }
 
-  async deleteBook(id: string): Promise<void> {
-    await this.bookRepository.delete(id);
+  async deleteBook(id: string): Promise<Book> {
+    const book = await this.getBookById(id);
+    return await this.bookRepository.remove(book);
   }
 }

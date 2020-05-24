@@ -12,7 +12,7 @@ const mockAuthorRepository = () => ({
   findOne: jest.fn(),
   createAuthor: jest.fn(),
   save: jest.fn(),
-  delete: jest.fn(),
+  remove: jest.fn(),
 });
 
 describe('AuthorsService', () => {
@@ -115,8 +115,15 @@ describe('AuthorsService', () => {
 
   describe('deleteAuthor', () => {
     it('calls repository.delete with provided id', async () => {
+      service.getAuthorById = jest
+        .fn()
+        .mockResolvedValue({ firstName: 'First', lastName: 'Last' });
+
       await service.deleteAuthor(mockId);
-      expect(repository.delete).toHaveBeenCalledWith(mockId);
+      expect(repository.remove).toHaveBeenCalledWith({
+        firstName: 'First',
+        lastName: 'Last',
+      });
     });
   });
 });
