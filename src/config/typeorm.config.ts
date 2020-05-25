@@ -1,12 +1,12 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Author } from '../authors/author.entity';
-import { Book } from '../books/book.entity';
+import { Injectable } from '@nestjs/common';
+import { TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
 
-export const typeOrmConfig: TypeOrmModuleOptions = {
-  type: 'mongodb',
-  url: process.env.DATABASE_URL,
-  synchronize: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  entities: [Author, Book],
-};
+@Injectable()
+export class DatabaseConfig implements TypeOrmOptionsFactory {
+  constructor(private configService: ConfigService) {}
+
+  createTypeOrmOptions() {
+    return this.configService.get('database');
+  }
+}
